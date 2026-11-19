@@ -35,7 +35,7 @@ jobs:
             --connect-timeout 15 \
             --max-time 60 \
             -H "Authorization: Bearer $API_TOKEN" \
-            "https://telegrambot-six-gules.vercel.app/api/today-summary?format=json&top=1" \
+            "https://telegrambot-six-gules.vercel.app/api/today-summary?format=json" \
             -o /tmp/response.json \
             -w "%{http_code}")
 
