@@ -27,7 +27,7 @@ jobs:
             --retry-all-errors \
             --connect-timeout 15 \
             --max-time 60 \
-            -H "Authorization: Bearer $API_KEY" \
+            -H "Authorization: Bearer $KEY_ONE_V" \
             "https://telegrambot-six-gules.vercel.app/api/today-summary?format=json&top=1" \
             -o /tmp/response.json
           jq . /tmp/response.json > data/response.json
