@@ -12,7 +12,7 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    environment: KEY_ONE_VERCEL      # unlocks the environment secrets
+    environment: KEY_ONE_VERCEL
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -35,7 +35,7 @@ jobs:
             --connect-timeout 15 \
             --max-time 60 \
             -H "Authorization: Bearer $API_TOKEN" \
-            "https://telegrambot-six-gules.vercel.app/api/today-summary?format=json" \
+            "https://telegrambot-six-gules.vercel.app/api/today-summary?format=json&top=1" \
             -o /tmp/response.json \
             -w "%{http_code}")
 
@@ -47,16 +47,31 @@ jobs:
             exit 1
           fi
 
-          jq . /tmp/response.json > data/response.json
+          TODAY=$(TZ=Asia/Kolkata date +%F)
+          jq . /tmp/response.json > "data/$TODAY.json"
+          cp "data/$TODAY.json" data/latest.json
+
+      - name: Delete data older than 90 days
+        run: |
+          CUTOFF=$(TZ=Asia/Kolkata date -d "90 days ago" +%F)
+          echo "Removing files older than $CUTOFF"
+          for f in data/20??-??-??.json; do
+            [ -e "$f" ] || continue
+            d=$(basename "$f" .json)
+            if [[ "$d" < "$CUTOFF" ]]; then
+              echo "Deleting $f"
+              rm "$f"
+            fi
+          done
 
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/response.json
+          git add -A data
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Update API data $(date -u +%F)"
+            git commit -m "Update API data $(TZ=Asia/Kolkata date +%F)"
             git push
           fi
