@@ -3,10 +3,10 @@ name: Daily API fetch
 on:
   schedule:
     - cron: "30 0 * * *"   # 00:30 UTC = 6:00 AM IST
-  workflow_dispatch:        # run manually from the Actions tab
+  workflow_dispatch:
 
 permissions:
-  contents: write           # needed to push the commit
+  contents: write
 
 jobs:
   fetch:
@@ -17,19 +17,28 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Fetch API response (with retry)
-        env:
-          API_KEY: ${{ secrets.KEY_ONE_V }}   # remove this line and the -H line below if no auth needed
         run: |
           mkdir -p data
-          curl -sf \
+
+          STATUS=$(curl -s \
             --retry 5 \
             --retry-delay 10 \
             --retry-all-errors \
             --connect-timeout 15 \
             --max-time 60 \
-            -H "Authorization: Bearer $API_KEY" \
+            -A "github-actions-fetch" \
             "https://telegrambot-six-gules.vercel.app/api/today-summary?format=json&top=1" \
-            -o /tmp/response.json
+            -o /tmp/response.json \
+            -w "%{http_code}")
+
+          echo "HTTP status: $STATUS"
+
+          if [ "$STATUS" -ne 200 ]; then
+            echo "Response body:"
+            head -c 500 /tmp/response.json
+            exit 1
+          fi
+
           jq . /tmp/response.json > data/response.json
 
       - name: Commit and push if changed
