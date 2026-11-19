@@ -12,13 +12,21 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    environment: KEY_ONE_VERCEL      # unlocks the environment secrets
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Fetch API response (with retry)
+        env:
+          API_TOKEN: ${{ secrets.KEY_ONE_V }}
         run: |
           mkdir -p data
+
+          if [ -z "$API_TOKEN" ]; then
+            echo "Token secret is not set"
+            exit 1
+          fi
 
           STATUS=$(curl -s \
             --retry 5 \
@@ -26,7 +34,7 @@ jobs:
             --retry-all-errors \
             --connect-timeout 15 \
             --max-time 60 \
-            -A "github-actions-fetch" \
+            -H "Authorization: Bearer $API_TOKEN" \
             "https://telegrambot-six-gules.vercel.app/api/today-summary?format=json&top=1" \
             -o /tmp/response.json \
             -w "%{http_code}")
