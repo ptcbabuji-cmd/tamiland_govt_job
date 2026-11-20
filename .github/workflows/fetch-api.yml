@@ -26,7 +26,7 @@ jobs:
       - name: Fetch API response (with retry)
         env:
           API_TOKEN: ${{ secrets.KEY_ONE_V }}
-          API_URL: ${{ vars.API_URL }}
+          API_URL: ${{ secrets.API_URL }}
         run: |
           mkdir -p data
 
