@@ -1,1 +1,56 @@
-[]
+[
+  {
+    "s_no": 1,
+    "organization": "RITES Recruitment 2026",
+    "post": "8 Technical Assistant, Technician Posts",
+    "vacancies": "8",
+    "qualification": "10th",
+    "detail_qualification": "Matriculation plus ITI in relevant trade or Diploma in Civil/Architecture",
+    "job_type": "contract",
+    "location": "Central",
+    "last_date": "15-12-2026",
+    "apply_mode": "Online",
+    "official_site": "https://rites.com",
+    "notification_pdf": "https://rites.com/Upload/Career/Final_adv_of_RG_50-52_26_pdf-2026-Nov-16-13-3-13.pdf",
+    "application_fee": "Rs. 300 plus Taxes (General/OBC); Rs. 100 plus Taxes (EWS/SC/ST/PWD)",
+    "age_limit_min": "",
+    "age_limit_max": "36",
+    "salary": "INR 22,000 - 90,000"
+  },
+  {
+    "s_no": 2,
+    "organization": "ICMR Young Professional I Recruitment 2026",
+    "post": "Walkin",
+    "vacancies": "5",
+    "qualification": "B.B.AVACANCY",
+    "detail_qualification": "B.B.AVACANCY",
+    "job_type": "contract",
+    "location": "Central",
+    "last_date": "27-11-2026",
+    "apply_mode": "Offline",
+    "official_site": "https://www.icmr.gov.in",
+    "notification_pdf": "https://www.icmr.gov.in/icmrobject/uploads/Recruitment/1795080411_document-28.pdf",
+    "application_fee": "",
+    "age_limit_min": "",
+    "age_limit_max": "30",
+    "salary": "Rs. 35,000"
+  },
+  {
+    "s_no": 3,
+    "organization": "Mahabubnagar District Court Court Attendant Recruitment 2026",
+    "post": "",
+    "vacancies": "1",
+    "qualification": "10th",
+    "detail_qualification": "10TH, 7thVACANCY",
+    "job_type": "contract",
+    "location": "TS",
+    "last_date": "30-11-2026",
+    "apply_mode": "Offline",
+    "official_site": "https://mahabubnagar.dcourts.gov.in",
+    "notification_pdf": "https://cdnbbsr.s3waas.gov.in/s3ec028c9a14ffebb7677d033ffce84799/uploads/2026/11/2026111987.pdf",
+    "application_fee": "",
+    "age_limit_min": "18",
+    "age_limit_max": "46",
+    "salary": "Rs. 3000"
+  }
+]
