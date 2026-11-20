@@ -2,11 +2,17 @@ name: Daily API fetch
 
 on:
   schedule:
-    - cron: "30 0 * * *"   # 00:30 UTC = 6:00 AM IST
+    - cron: "30 4 * * *"    # 10:00 AM IST
+    - cron: "30 8 * * *"    # 2:00 PM IST
+    - cron: "30 12 * * *"   # 6:00 PM IST
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: fetch-api
+  cancel-in-progress: false
 
 jobs:
   fetch:
@@ -20,11 +26,17 @@ jobs:
       - name: Fetch API response (with retry)
         env:
           API_TOKEN: ${{ secrets.KEY_ONE_V }}
+          API_URL: ${{ vars.API_URL }}
         run: |
           mkdir -p data
 
           if [ -z "$API_TOKEN" ]; then
             echo "Token secret is not set"
+            exit 1
+          fi
+
+          if [ -z "$API_URL" ]; then
+            echo "API_URL variable is not set"
             exit 1
           fi
 
@@ -35,7 +47,7 @@ jobs:
             --connect-timeout 15 \
             --max-time 60 \
             -H "Authorization: Bearer $API_TOKEN" \
-            "https://telegrambot-six-gules.vercel.app/api/today-summary?format=json&top=1" \
+            "$API_URL" \
             -o /tmp/response.json \
             -w "%{http_code}")
 
@@ -72,6 +84,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Update API data $(TZ=Asia/Kolkata date +%F)"
+            git commit -m "Update API data $(TZ=Asia/Kolkata date '+%F %H:%M')"
             git push
           fi
