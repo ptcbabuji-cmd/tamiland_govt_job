@@ -1,0 +1,38 @@
+[
+  {
+    "s_no": 1,
+    "organization": "Indian Army Sports Quota Recruitment 2026",
+    "post": "Havildar and Naib Subedar",
+    "vacancies": "1",
+    "qualification": "Graduate",
+    "detail_qualification": "Graduate",
+    "job_type": "full",
+    "location": "Central",
+    "last_date": "31-12-2026",
+    "apply_mode": "Offline",
+    "official_site": "https://joinindianarmy.nic.in",
+    "notification_pdf": "",
+    "application_fee": "Not Specified in Uploaded Short Notice Application Mode | Offline - India Post O",
+    "age_limit_min": "",
+    "age_limit_max": "",
+    "salary": "According to Applicable Indian Army Pay and Service Rules"
+  },
+  {
+    "s_no": 2,
+    "organization": "CSIR CIMAP Project Assistant Recruitment 2026",
+    "post": "Project Assistant",
+    "vacancies": "1",
+    "qualification": "B.Sc",
+    "detail_qualification": "B.Sc",
+    "job_type": "contract",
+    "location": "UK",
+    "last_date": "10-12-2026",
+    "apply_mode": "Offline",
+    "official_site": "https://cimap.res.in",
+    "notification_pdf": "https://cimap.res.in/CimapAdmin/Data/Vacancy/Adevrtisement.pdf",
+    "application_fee": "",
+    "age_limit_min": "",
+    "age_limit_max": "35",
+    "salary": "Rs. 15,000"
+  }
+]
